@@ -60,6 +60,29 @@ router.post('/kpi', function (req, res) {
 
 });
 
+router.post('/savemap', function (req, res) {
+
+    var db = req.db;
+
+    var lat = req.body.lat;
+    var lng = req.body.lng;
+    var title = req.body.title;
+
+    db('latlng')
+        .insert({
+            lat: lat,
+            lng: lng,
+            title: title
+        })
+        .then(function () {
+            res.send({ok: true});
+        })
+        .catch(function (err) {
+            res.send({ok: false, msg: err});
+        });
+
+});
+
 
 
 
